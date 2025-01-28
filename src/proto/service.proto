@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+service TimeService {
+  rpc GetTime (google.protobuf.Empty) returns (TimeResponse) {}
+  rpc AddDays (Days) returns (TimeResponse) {}
+}
+
+message Days {
+  int32 days = 1;
+}
+
+message TimeResponse {
+  string iso_time = 1;
+}

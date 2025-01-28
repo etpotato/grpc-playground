@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist"
+    "start:server": "node dist/server.js",
+    "start:client": "node dist/client.js",
+    "gen": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/__generated/ src/proto/*.proto"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,11 @@
     "node": "20.15.0"
   },
   "devDependencies": {
+    "@protobuf-ts/plugin": "2.9.4",
     "typescript": "5.5.2"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "1.10.10",
+    "@grpc/proto-loader": "0.7.13"
   }
 }
