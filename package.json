@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm gen && tsc",
     "start:server": "node dist/server.js",
     "start:client": "node dist/client.js",
     "gen": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/__generated/ src/proto/*.proto"

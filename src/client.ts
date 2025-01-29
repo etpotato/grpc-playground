@@ -36,6 +36,19 @@ function run() {
       console.log(`(client) Got server message: ${response.isoTime}`);
     }
   })
+
+  const isDateStream = client.IsDate();
+
+  ['2021-01-01', 'not a date', '2021-01-02'].forEach((date, index) => {
+    setTimeout(() => {
+      isDateStream.write({ date });
+    }, 1000 * (index + 1));
+  });
+
+  isDateStream.on('data', (response) => {
+    console.log(`(client) Got server message from stream: ${response.isDate}`);
+  });
+
 }
 
 run();

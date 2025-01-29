@@ -4,6 +4,9 @@ import { TimeServiceHandlers } from './__generated/TimeService';
 import { TimeResponse } from './__generated/TimeResponse';
 import { Days } from './__generated/Days';
 import { ProtoGrpcType } from './__generated/service';
+import { IsDateDto } from './__generated/IsDateDto';
+import { IsDateRequest } from './__generated/IsDateRequest';
+import { IsDateResponse } from './__generated/IsDateResponse';
 
 const host = '0.0.0.0:8080';
 
@@ -36,6 +39,12 @@ const exampleServer: TimeServiceHandlers = {
       isoTime: new Date(new Date().valueOf() + (call.request.days || 0) * 24 * 60 * 60 * 1000).toISOString(),
     });
   },
+  IsDate(call: grpc.ServerDuplexStream<IsDateRequest, IsDateResponse>) {
+    call.on('data', ({ date }: IsDateRequest) => {
+      console.log('(server) Got client message', JSON.stringify(date, null, 2));
+      call.write({ isDate: date ? !Number.isNaN(Date.parse(date)) : false });
+    });
+  }
 };
 
 function getServer(): grpc.Server {
